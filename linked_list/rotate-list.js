@@ -13,5 +13,23 @@ Output: [2,0,1]
  */
 
 var rotateRight = function(head, k) {
-    
+    if(!head) return head;
+    let count = 1;
+    let curr = head;
+    while(curr && curr.next){
+        curr = curr.next;
+        count++;
+    }
+    k = k % count;
+    if(!k) return head;
+    let c=0;
+    let tail = head;
+    while(c!==count-k-1){
+        tail = tail.next;
+        c++;
+    }
+    let newHead = tail.next;
+    tail.next=null;
+    curr.next = head;
+    return newHead;
 };
