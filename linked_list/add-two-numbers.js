@@ -11,33 +11,54 @@ You may assume the two numbers do not contain any leading zero, except the numbe
 
  */
 var addTwoNumbers = function(l1,l2){
-    let carry=0, l3Front=null, l3Tail=null;
-    while(l1 || l2){
-        let sum =0;
+    // let carry=0, l3Front=null, l3Tail=null;
+    // while(l1 || l2){
+    //     let sum =0;
+    //     if(l1){
+    //         sum+=l1.val;
+    //         l1=l1.next;
+    //     }
+    //     if(l2){
+    //         sum+=l2.val;
+    //         l2=l2.next;
+    //     }
+    //     if(carry) sum+= carry;
+    //     let r = sum % 10;
+    //     carry = parseInt(sum / 10);
+    //     const newNode = new ListNode(r, null);
+    //     if(!l3Front){
+    //         l3Front = newNode;
+    //         l3Tail = newNode;
+    //     }else{
+    //         l3Tail.next = newNode;
+    //         l3Tail = newNode;
+    //     }
+    // }
+    // if(carry){
+    //     const newNode = new ListNode(carry, null);
+    //     l3Tail.next = newNode;
+    //     l3Tail=newNode;
+    // }
+    // return l3Front;
+
+    let dummy = new ListNode(0, null);
+    let carry = 0, curr = dummy;
+    while(l1 || l2 || carry){
+        let sum = 0;
         if(l1){
             sum+=l1.val;
-            l1=l1.next;
+            l1 = l1.next;
         }
         if(l2){
             sum+=l2.val;
-            l2=l2.next;
+            l2 = l2.next;
         }
-        if(carry) sum+= carry;
-        let r = sum % 10;
-        carry = parseInt(sum / 10);
-        const newNode = new ListNode(r, null);
-        if(!l3Front){
-            l3Front = newNode;
-            l3Tail = newNode;
-        }else{
-            l3Tail.next = newNode;
-            l3Tail = newNode;
-        }
+        sum+=carry;
+        let rem = sum % 10;
+        carry = Math.floor(sum / 10);
+        let newNode = new ListNode(rem, null);
+        curr.next = newNode;
+        curr = newNode;
     }
-    if(carry){
-        const newNode = new ListNode(carry, null);
-        l3Tail.next = newNode;
-        l3Tail=newNode;
-    }
-    return l3Front;
+    return dummy.next;
 }
